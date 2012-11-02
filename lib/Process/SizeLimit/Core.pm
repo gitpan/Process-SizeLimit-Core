@@ -49,7 +49,7 @@ use vars qw(
                 $START_TIME
                );
 
-$VERSION = '0.9501';
+$VERSION = '0.9502';
 
 $REQUEST_COUNT          = 1;
 
@@ -160,6 +160,8 @@ BEGIN {
         *_platform_getppid = \&_perl_getppid;
     }
     elsif ($Config{'osname'} =~ /darwin/i) {
+        _load('BSD::Resource');
+
         *_platform_check_size   = \&_darwin_size_check;
         *_platform_getppid = \&_perl_getppid;
     }
@@ -286,6 +288,8 @@ sub _linux_getppid { return Linux::Pid::getppid() }
 1;
 
 __END__
+
+=encoding utf8
 
 =head1 NAME
 
