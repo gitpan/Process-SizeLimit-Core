@@ -24,8 +24,5 @@ requires:
   perl: 5.005
 resources:
   homepage: https://github.com/audreyt/process-sizelimit-core/tree
-  repository:
-    type: git
-    url: git://github.com/audreyt/process-sizelimit-core.git
-    web: https://github.com/audreyt/process-sizelimit-core/tree
-version: 0.9502
+  repository: git://github.com/audreyt/process-sizelimit-core.git
+version: 0.9503

@@ -49,7 +49,7 @@ use vars qw(
                 $START_TIME
                );
 
-$VERSION = '0.9502';
+$VERSION = '0.9503';
 
 $REQUEST_COUNT          = 1;
 
@@ -161,8 +161,13 @@ BEGIN {
     }
     elsif ($Config{'osname'} =~ /darwin/i) {
         _load('BSD::Resource');
-
-        *_platform_check_size   = \&_darwin_size_check;
+        if (qx[sw_vers -productVersion] - 10 >= 0.9) {
+            # OSX 10.9+ has no concept of rshrd in top
+            *_platform_check_size   = \&_bsd_size_check;
+        }
+        else {
+            *_platform_check_size   = \&_darwin_size_check;
+        }
         *_platform_getppid = \&_perl_getppid;
     }
 #    elsif (IS_WIN32i && $mod_perl::VERSION < 1.99) {
